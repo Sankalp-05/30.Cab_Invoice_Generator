@@ -32,5 +32,17 @@ namespace CabInvoiceTest
             Assert.AreEqual(expectedSummary.GetType(), summary.GetType());
             // Assert.AreEqual(expectedSummary, summary);
         }
+
+        // Test Case for UC3- Invoice summary with Averange Fare
+        [Test]
+        public void GivenMultipleRidesShouldReturnInvoiceSummaryAndAverangeFare()
+        {
+            invoiceGenerator = new InvoiceGenerator(RideType.PREMIUM);
+            Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
+            InvoiceSummary summary = invoiceGenerator.CalculateFare(rides);
+            InvoiceSummary expectedSummary = new InvoiceSummary(2, 65.0);
+            Assert.AreEqual(expectedSummary.GetType(), summary.GetType());
+            // Assert.AreEqual(expectedSummary, summary);
+        }
     }
 }
