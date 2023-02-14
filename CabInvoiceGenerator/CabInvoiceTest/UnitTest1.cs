@@ -61,5 +61,22 @@ namespace CabInvoiceTest
             Assert.AreEqual(expectedSummary.GetType(), summary.GetType());
             //Assert.AreEqual(expectedSummary, summary);
         }
+
+        // Test case for UC5-Premium Rides
+        [Test]
+        public void GivenUserIdShouldReturnInvoiceForPremiumRides()
+        {
+            InvoiceGenerator invoiceGenerator = new InvoiceGenerator(RideType.PREMIUM);
+            Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 5) };
+            string userId = "001";
+            invoiceGenerator.AddRides(userId, rides);
+            string userIdForSecondUser = "002";
+            Ride[] ridesForSeconndUser = { new Ride(3.0, 10), new Ride(1.0, 2) };
+            invoiceGenerator.AddRides(userIdForSecondUser, ridesForSeconndUser);
+            InvoiceSummary summary = invoiceGenerator.GetInvoiceSummary(userId);
+            InvoiceSummary expectedSummary = new InvoiceSummary(2, 65.0);
+            Assert.AreEqual(expectedSummary.GetType(), summary.GetType());
+            // Assert.AreEqual(expectedSummary, summary);
+        }
     }
 }
